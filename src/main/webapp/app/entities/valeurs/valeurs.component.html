@@ -1,0 +1,61 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="espfSampleApplicationApp.valeurs.home.title">Valeurs</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-valeurs" [routerLink]="['/valeurs/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="espfSampleApplicationApp.valeurs.home.createLabel">
+            Create a new Valeurs
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="valeurs?.length === 0">
+        <span jhiTranslate="espfSampleApplicationApp.valeurs.home.notFound">No valeurs found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="valeurs?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="espfSampleApplicationApp.valeurs.valeur">Valeur</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let valeurs of valeurs ;trackBy: trackId">
+                    <td><a [routerLink]="['/valeurs', valeurs.id, 'view']">{{ valeurs.id }}</a></td>
+                    <td>{{ valeurs.valeur }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/valeurs', valeurs.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/valeurs', valeurs.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(valeurs)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

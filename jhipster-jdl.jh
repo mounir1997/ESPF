@@ -1,0 +1,18 @@
+
+entity Utilisateur{
+
+	login String required,
+    mdp String required,
+    role String required
+}
+
+
+entity Projet{
+	nom String required,
+	devise String required,
+    periodicite String required
+}
+
+relationship ManyToOne {
+	Projet{utilisateur(login) } to Utilisateur
+}
